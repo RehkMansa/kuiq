@@ -12,12 +12,14 @@ const GlobalStyles = createGlobalStyle`
     --ff-header: 'Kanit', sans-serif;
     --default-color: #000;
     --secondary-color: #fff;
+    --green: #27AE60;
   }
   body {
     font-family: 'Mulish', sans-serif;
     font-size: var(--fs-default);
     line-height: var(--lh-regular);
     font-weight: var(--fw-regular);
+    padding: 0 5%;
   }
   * {
     margin: 0;
@@ -35,15 +37,15 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
   button {
-    padding: 3px 24px;
+    padding: 9px 25px;
     font-size: var(--ff-body);
-    font-family: var(--ff-header);
+    font-family: inherit;
     font-weight: 500;
-    background-color: var(--default-color);
+    background-color: var(--green);
     color: var(--secondary-color);
-    border: 2px solid var(--default-color);
+    border: none;
     outline: none;
-    border-radius: 24px;
+    border-radius: 5px;
     text-transform: capitalize;
   }
   /* button:hover {
