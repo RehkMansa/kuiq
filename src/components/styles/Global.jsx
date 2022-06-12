@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     --secondary-color: #fff;
   }
   body {
-    font-family: var(--ff-body);
+    font-family: 'Mulish', sans-serif;
     font-size: var(--fs-default);
     line-height: var(--lh-regular);
     font-weight: var(--fw-regular);
@@ -23,15 +23,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--ff-header);
-    font-weight: var(--fw-header);
   }
   h1{
     font-weight: var(--fw-bold);

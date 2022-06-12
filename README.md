@@ -1,1 +1,1 @@
- An online store built with react, redux, firebase 
+AirBnb clone
