@@ -50,10 +50,11 @@ const NavbarLeft = styled.div`
 const MenuBars = styled.div`
   width: 100%;
   padding: 30px 20px;
-  border-radius: 24px 0px 24px 24px;
+  padding-left: 50px;
+  border-radius: 44px 10px 44px 24px;
   position: absolute;
-  right: 0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   display: none;
   gap: 30px;
   flex-direction: column;

@@ -10,8 +10,11 @@ const GlobalStyles = createGlobalStyle`
     --lh-regular: 1;
     --ff-body: 'Source Sans Pro', sans-serif;
     --ff-header: 'Kanit', sans-serif;
-    --default-color: #000;
-    --secondary-color: #fff;
+    --gray1: #333333;
+    --gray2: #4F4F4F;
+    --gray4: #BDBDBD;
+    --gray5: #E0E0E0;
+    --white: #fff;
     --green: #27AE60;
   }
   body {
@@ -20,6 +23,7 @@ const GlobalStyles = createGlobalStyle`
     line-height: var(--lh-regular);
     font-weight: var(--fw-regular);
     padding: 0 5%;
+    color: var(--gray1)
   }
   * {
     margin: 0;
@@ -42,17 +46,21 @@ const GlobalStyles = createGlobalStyle`
     font-family: inherit;
     font-weight: 500;
     background-color: var(--green);
-    color: var(--secondary-color);
+    color: var(--white);
     border: none;
     outline: none;
     border-radius: 5px;
     text-transform: capitalize;
   }
-  /* button:hover {
-    background-color: var(--secondary-color);
-    color: var(--default-color);
-    border: 2px solid var(--default-color);
-  } */
+  input{
+    padding: 9px 25px;
+    font-size: var(--ff-body);
+    font-family: inherit;
+    font-weight: 500;
+    outline:none;
+    border-radius: 5px;
+    border: 1px solid var(--gray2)
+  }
   button:hover,
   a:hover {
     transition: all 0.5s ease-in-out;
