@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Mulish', sans-serif;
     font-size: var(--fs-default);
     line-height: var(--lh-regular);
-    font-weight: var(--fw-regular);
+    font-weight: var(--fw-bold);
     padding: 0 5%;
     color: var(--gray1)
   }
@@ -56,7 +56,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 9px 25px;
     font-size: var(--ff-body);
     font-family: inherit;
-    font-weight: 500;
+    font-weight: 600;
     outline:none;
     border-radius: 5px;
     border: 1px solid var(--gray2)

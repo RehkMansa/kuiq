@@ -15,6 +15,9 @@ const FormWrapper = styled.form`
   .form-select {
     width: 30%;
   }
+  div {
+    color: var(--gray4);
+  }
   & > button {
     width: 20%;
   }
