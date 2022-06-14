@@ -16,14 +16,15 @@ const GlobalStyles = createGlobalStyle`
     --gray5: #E0E0E0;
     --white: #fff;
     --green: #27AE60;
+    overflow-x: hidden;
   }
   body {
     font-family: 'Mulish', sans-serif;
     font-size: var(--fs-default);
     line-height: var(--lh-regular);
     font-weight: var(--fw-bold);
-    padding: 0 5%;
-    color: var(--gray1)
+    color: var(--gray1);
+    min-height: 100vh;
   }
   * {
     margin: 0;

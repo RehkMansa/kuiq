@@ -21,7 +21,7 @@ const listOfStates = [
   { name: 'See All States' },
 ];
 
-const ListDiv = styled.div`
+const ListDiv = styled.section`
   h3 {
   }
 `;

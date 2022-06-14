@@ -6,14 +6,18 @@ import FeaturedSection from './components/FeaturedSection';
 import LocationSection from './components/LocationSection';
 import LocationList from './components/LocationList';
 import ApartmentFeatures from './components/ApartementFeatures';
+import Testimonials from './components/Testimonials';
 
-const RoutesContainer = styledComponents.main`
-
+const Container = styledComponents.main`
+  & > *{
+    
+    padding: 40px 5%;
+  }
 `;
 
 function App() {
   return (
-    <div className="App">
+    <Container className="App">
       <GlobalStyles />
       <Navbar />
       <HeroSection />
@@ -21,7 +25,8 @@ function App() {
       <LocationSection />
       <LocationList />
       <ApartmentFeatures />
-    </div>
+      <Testimonials />
+    </Container>
   );
 }
 
