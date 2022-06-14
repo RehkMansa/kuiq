@@ -5,6 +5,8 @@ import { useState } from 'react';
 
 const MenuWrap = styled.header`
   position: relative;
+  padding-top: 0;
+  padding-bottom: 0;
 `;
 
 const Nav = styled.nav`

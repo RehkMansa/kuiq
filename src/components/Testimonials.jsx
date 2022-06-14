@@ -8,7 +8,6 @@ const Section = styled.section`
   padding: 50px 0;
   gap: 40px;
   text-align: center;
-  // width: 100vw;
   position: relative;
   background-image: url(images/banner-01.jpg);
   background-size: cover;
@@ -33,12 +32,6 @@ const SectionContent = styled.div`
     font-weight: 700;
     font-size: 18px;
   }
-`;
-const Overlay = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: var(--green);
 `;
 const Testimonials = () => {
   return (

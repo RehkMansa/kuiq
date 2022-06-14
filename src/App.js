@@ -9,6 +9,7 @@ import ApartmentFeatures from './components/ApartementFeatures';
 import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
+import SignUP from './components/SignUp';
 
 const Container = styledComponents.main`
   & > *{
@@ -31,6 +32,8 @@ function App() {
       <Testimonials />
       <CTA />
       <Footer />
+
+      <SignUP/>
     </Container>
   );
 }

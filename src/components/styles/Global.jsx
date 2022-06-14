@@ -25,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: var(--fw-bold);
     color: var(--gray1);
     min-height: 100vh;
+    position: relative;
   }
   * {
     margin: 0;
@@ -60,7 +61,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     outline:none;
     border-radius: 5px;
-    border: 1px solid var(--gray2)
+    border: 1px solid var(--gray4)
   }
   button:hover,
   a:hover {
