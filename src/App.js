@@ -3,6 +3,9 @@ import styledComponents from 'styled-components';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import FeaturedSection from './components/FeaturedSection';
+import LocationSection from './components/LocationSection';
+import LocationList from './components/LocationList';
+import ApartmentFeatures from './components/ApartementFeatures';
 
 const RoutesContainer = styledComponents.main`
 
@@ -15,6 +18,9 @@ function App() {
       <Navbar />
       <HeroSection />
       <FeaturedSection />
+      <LocationSection />
+      <LocationList />
+      <ApartmentFeatures />
     </div>
   );
 }
