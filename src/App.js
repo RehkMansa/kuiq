@@ -1,39 +1,49 @@
+import { auth, db, handleUserProfile } from './components/firebase/utils';
 import GlobalStyles from './components/styles/Global';
 import styledComponents from 'styled-components';
 import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import FeaturedSection from './components/FeaturedSection';
-import LocationSection from './components/LocationSection';
-import LocationList from './components/LocationList';
-import ApartmentFeatures from './components/ApartementFeatures';
-import Testimonials from './components/Testimonials';
-import CTA from './components/CTA';
 import Footer from './components/Footer';
 import SignUP from './components/SignUp';
-
+import HomePage from './components/HomePage';
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, onSnapshot } from 'firebase/firestore';
 const Container = styledComponents.main`
-  & > *{
+  & > section,
+  & > footer{
     padding: 40px 5%;
-    padding-left: 5%;
-    padding-right: 5%;
+  }
+  & > header{
+    padding: 10px 5%;
   }
 `;
 
 function App() {
+  const [currentUser, setCurrentUser] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userData = await handleUserProfile(user);
+        onSnapshot(userData, (snapshot) => {
+          console.log('Current data: ', snapshot.data());
+          setCurrentUser({ ...snapshot.data() });
+          console.log(currentUser);
+        });
+      } else {
+        setCurrentUser('');
+        console.log('User Not Logged In');
+      }
+    });
+  }, []);
   return (
     <Container className="App">
       <GlobalStyles />
-      <Navbar />
-      <HeroSection />
-      <FeaturedSection />
-      <LocationSection />
-      <LocationList />
-      <ApartmentFeatures />
-      <Testimonials />
-      <CTA />
+      <Navbar modal={setShowModal} userDetails={currentUser} />
+      <HomePage userDetails={currentUser} />
       <Footer />
-
-      <SignUP/>
+      {showModal && <SignUP modal={setShowModal} />}
     </Container>
   );
 }

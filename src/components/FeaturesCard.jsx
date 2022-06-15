@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  p{
+  p {
     text-transform: capitalize;
   }
 `;

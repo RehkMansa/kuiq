@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaAlignJustify } from 'react-icons/fa';
+import { BiUserCircle } from 'react-icons/bi';
 import { useState } from 'react';
+import { auth } from './firebase/utils';
 
 const MenuWrap = styled.header`
   position: relative;
@@ -42,6 +44,9 @@ const NavbarLeft = styled.div`
     display: flex;
     gap: 30px;
     justify-content: space-evenly;
+    li {
+      cursor: pointer;
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -70,10 +75,13 @@ const MenuBars = styled.div`
   }
 `;
 
-const Navbar = () => {
+const Navbar = ({ userDetails, modal }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const toggleMobile = (param) => {
     toggleMenu === true ? setToggleMenu(false) : setToggleMenu(true);
+  };
+  const signUp = (param) => {
+    modal(true);
   };
   return (
     <MenuWrap>
@@ -83,21 +91,36 @@ const Navbar = () => {
         </Link>
         <FaAlignJustify onClick={toggleMobile} className="menu-toggle" />
         <NavbarLeft>
-          <ul>
-            <li>Become a Host</li>
-            <li>Sign Up</li>
-            <li>Help</li>
-          </ul>
-          <button>Login</button>
+          {userDetails ? (
+            <>
+              <p>{userDetails.displayName}</p>
+              <button
+                onClick={() => {
+                  auth.signOut();
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <ul>
+                <li>Become a Host</li>
+                <li>Help</li>
+                <li onClick={signUp}>Sign Up</li>
+              </ul>
+              <button>Login</button>
+            </>
+          )}
         </NavbarLeft>
       </Nav>
       {toggleMenu && (
         <MenuBars>
           <ul>
             <li>Become a Host</li>
-            <li>Sign up</li>
-            <li>Login</li>
             <li>Help</li>
+            <li>Login</li>
+            <li onClick={signUp}>Sign up</li>
           </ul>
         </MenuBars>
       )}
