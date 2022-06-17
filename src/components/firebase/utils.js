@@ -7,7 +7,8 @@ import {
   getDoc,
   doc,
   setDoc,
-  onSnapshot,
+  collection,
+  addDoc,
 } from 'firebase/firestore';
 
 const app = initializeApp(firebaseConfig);
@@ -44,4 +45,27 @@ export const handleUserProfile = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+const saveToDB = async (data, dbLocation) => {
+  const colRef = collection(db, dbLocation);
+
+  await addDoc(colRef, data);
+};
+
+export const saveUsers = async (url, dbCollection) => {
+  let users;
+  await fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      users = data.results;
+    });
+
+  // const colRef = collection(db, dbCollection);
+
+  const mapUsers = Promise.all(
+    users.map(async (user) => {
+      await saveToDB(user, dbCollection);
+    })
+  );
 };

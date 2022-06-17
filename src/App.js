@@ -8,6 +8,9 @@ import HomePage from './components/HomePage';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { Route, Routes } from 'react-router-dom';
+import AgentPage from './components/Agents';
+import Error404page from './components/404';
 const Container = styledComponents.main`
   & > section,
   & > footer{
@@ -23,6 +26,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userData = await handleUserProfile(user);
@@ -41,7 +45,14 @@ function App() {
     <Container className="App">
       <GlobalStyles />
       <Navbar modal={setShowModal} userDetails={currentUser} />
-      <HomePage userDetails={currentUser} />
+      <Routes>
+        <Route path="/" element={<HomePage userDetails={currentUser} />} />
+        <Route
+          path="/agents"
+          element={<AgentPage userDetails={currentUser} />}
+        />
+        <Route path="*" element={<Error404page />} />
+      </Routes>
       <Footer />
       {showModal && <SignUP modal={setShowModal} />}
     </Container>

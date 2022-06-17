@@ -105,7 +105,7 @@ const Navbar = ({ userDetails, modal }) => {
           ) : (
             <>
               <ul>
-                <li>Become a Host</li>
+                <li>Become an Agent</li>
                 <li>Help</li>
                 <li onClick={signUp}>Sign Up</li>
               </ul>
@@ -117,7 +117,7 @@ const Navbar = ({ userDetails, modal }) => {
       {toggleMenu && (
         <MenuBars>
           <ul>
-            <li>Become a Host</li>
+            <li>Become an Agent</li>
             <li>Help</li>
             <li>Login</li>
             <li onClick={signUp}>Sign up</li>
