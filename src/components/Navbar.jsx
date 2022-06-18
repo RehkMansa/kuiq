@@ -106,6 +106,9 @@ const Navbar = ({ userDetails, modal }) => {
             <>
               <ul>
                 <li>Become an Agent</li>
+                <li>
+                  <Link to='/agents'>All Agents</Link>
+                </li>
                 <li>Help</li>
                 <li onClick={signUp}>Sign Up</li>
               </ul>

@@ -1,4 +1,9 @@
-import { auth, db, handleUserProfile } from './components/firebase/utils';
+import {
+  auth,
+  db,
+  fetchAll,
+  handleUserProfile,
+} from './components/firebase/utils';
 import GlobalStyles from './components/styles/Global';
 import styledComponents from 'styled-components';
 import Navbar from './components/Navbar';
@@ -9,8 +14,9 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { Route, Routes } from 'react-router-dom';
-import AgentPage from './components/Agents';
+import AgentsPage from './components/Agents';
 import Error404page from './components/404';
+import AgentSingle from './components/Agent';
 const Container = styledComponents.main`
   & > section,
   & > footer{
@@ -26,7 +32,6 @@ function App() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userData = await handleUserProfile(user);
@@ -41,6 +46,7 @@ function App() {
       }
     });
   }, []);
+
   return (
     <Container className="App">
       <GlobalStyles />
@@ -49,8 +55,10 @@ function App() {
         <Route path="/" element={<HomePage userDetails={currentUser} />} />
         <Route
           path="/agents"
-          element={<AgentPage userDetails={currentUser} />}
+          element={<AgentsPage />}
         />
+        <Route path="/agents/:agentID" element={<AgentSingle />} />
+
         <Route path="*" element={<Error404page />} />
       </Routes>
       <Footer />

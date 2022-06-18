@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { saveUsers } from './firebase/utils';
-const url = 'https://randomuser.me/api/?results=8&nat=gb,us,es';
+import AgentSingle from './Agent';
+import { fetchAll } from './firebase/utils';
 
 const Section = styled.section`
+  min-height: 80vh;
   .header {
     h1 {
       font-size: 40px;
@@ -16,6 +18,7 @@ const Section = styled.section`
 `;
 
 const AgentWrapper = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -26,26 +29,44 @@ const AgentWrapper = styled.div`
 
 const AgentCard = styled.div`
   box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.09);
-  padding: 10px;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  .agent-info {
+    padding: 10px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .agent-image {
+    width: 20%;
+
+    img {
+      border-radius: 10px 0 0 10px;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
 `;
-const AgentPage = () => {
+const AgentsPage = (props) => {
+  const navigate = useNavigate();
+  const [agent, setAgent] = useState('');
+
+  const [countVar, setCountVar] = useState(0);
   const [agentsArray, setAgentsArray] = useState([]);
   useEffect(() => {
-    
-  /* const newUrl = 'https://randomuser.me/api/?results=1&nat=gb,us,es';
-    saveUsers(newUrl, 'agents'); */
-
     const fetchUser = async () => {
-      await fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          setAgentsArray(data.results);
-        });
+      await fetchAll('agents').then((res) => {
+        setAgentsArray(res);
+      });
     };
-
     fetchUser();
-  }, []);
+  }, [agentsArray]);
+
   return (
     <Section>
       <div className="header">
@@ -55,17 +76,28 @@ const AgentPage = () => {
           qui!
         </p>
       </div>
+
       <AgentWrapper>
         {agentsArray.map((agent) => {
           const { name, location, dob, picture } = agent;
           return (
-            <AgentCard key={agent.login.uuid}>
-              <h4>
-                {name.first} {name.last}
-              </h4>
-              <p>Age: {dob.age}</p>
-              <p>Location: {location.street.name}</p>
-              <img src={picture.thumbnail} alt="" />
+            <AgentCard
+              onClick={(e) => {
+                setAgent(agent);
+                navigate(`/agents/${agent.id}`, { state: agent });
+              }}
+              key={agent.id}
+            >
+              <div className="agent-image">
+                <img src={picture.large} alt="" />
+              </div>
+              <div className="agent-info">
+                <h4>
+                  {name.first} {name.last}
+                </h4>
+                <p>Age: {dob.age}</p>
+                <p>Location: {location.street.name}</p>
+              </div>
             </AgentCard>
           );
         })}
@@ -74,4 +106,4 @@ const AgentPage = () => {
   );
 };
 
-export default AgentPage;
+export default AgentsPage;

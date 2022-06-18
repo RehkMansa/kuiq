@@ -9,7 +9,9 @@ import {
   setDoc,
   collection,
   addDoc,
+  getDocs,
 } from 'firebase/firestore';
+import { async } from '@firebase/util';
 
 const app = initializeApp(firebaseConfig);
 
@@ -61,11 +63,21 @@ export const saveUsers = async (url, dbCollection) => {
       users = data.results;
     });
 
-  // const colRef = collection(db, dbCollection);
-
   const mapUsers = Promise.all(
     users.map(async (user) => {
       await saveToDB(user, dbCollection);
     })
   );
+};
+
+export const fetchAll = async (dbLocation) => {
+  const colRef = collection(db, dbLocation);
+  let dataResponse = [];
+  await getDocs(colRef).then((snapshot) => {
+    snapshot.docs.map((snap) => {
+      dataResponse.push({ ...snap.data(), id: snap.id });
+    });
+  });
+
+  return dataResponse;
 };
