@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaAlignJustify } from 'react-icons/fa';
-import { BiUserCircle } from 'react-icons/bi';
 import { useState } from 'react';
 import { auth } from './firebase/utils';
 
@@ -75,7 +74,7 @@ const MenuBars = styled.div`
   }
 `;
 
-const Navbar = ({ userDetails, modal }) => {
+const Navbar = ({ userInfo, modal }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const toggleMobile = (param) => {
     toggleMenu === true ? setToggleMenu(false) : setToggleMenu(true);
@@ -91,9 +90,9 @@ const Navbar = ({ userDetails, modal }) => {
         </Link>
         <FaAlignJustify onClick={toggleMobile} className="menu-toggle" />
         <NavbarLeft>
-          {userDetails ? (
+          {userInfo ? (
             <>
-              <p>{userDetails.displayName}</p>
+              <p>{userInfo.displayName}</p>
               <button
                 onClick={() => {
                   auth.signOut();
@@ -105,14 +104,12 @@ const Navbar = ({ userDetails, modal }) => {
           ) : (
             <>
               <ul>
-                <li>Become an Agent</li>
+                {/* <li>Become an Agent</li> */}
                 <li>
-                  <Link to='/agents'>All Agents</Link>
+                  <Link to="/agents">All Agents</Link>
                 </li>
-                <li>Help</li>
-                <li onClick={signUp}>Sign Up</li>
               </ul>
-              <button>Login</button>
+              <button>Sign In</button>
             </>
           )}
         </NavbarLeft>
@@ -120,10 +117,11 @@ const Navbar = ({ userDetails, modal }) => {
       {toggleMenu && (
         <MenuBars>
           <ul>
-            <li>Become an Agent</li>
-            <li>Help</li>
-            <li>Login</li>
-            <li onClick={signUp}>Sign up</li>
+            {/* <li>Become an Agent</li> */}
+            <li>
+              <Link to="/agents">All Agents</Link>
+            </li>
+            <li>Sign In</li>
           </ul>
         </MenuBars>
       )}

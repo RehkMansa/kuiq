@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './config';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-// import { async } from '@firebase/util';
 import {
   getFirestore,
   getDoc,
@@ -11,7 +10,6 @@ import {
   addDoc,
   getDocs,
 } from 'firebase/firestore';
-import { async } from '@firebase/util';
 
 const app = initializeApp(firebaseConfig);
 
@@ -81,3 +79,6 @@ export const fetchAll = async (dbLocation) => {
 
   return dataResponse;
 };
+/* await fetchAll('agents').then((res) => {
+        setAgentsArray(res);
+      }); */

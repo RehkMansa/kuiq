@@ -1,13 +1,9 @@
 import {
   auth,
-  db,
-  fetchAll,
   handleUserProfile,
 } from './components/firebase/utils';
 import GlobalStyles from './components/styles/Global';
 import styledComponents from 'styled-components';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import SignUP from './components/SignUp';
 import HomePage from './components/HomePage';
 import { useEffect, useState } from 'react';
@@ -30,6 +26,7 @@ const Container = styledComponents.main`
 function App() {
   const [currentUser, setCurrentUser] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [agentSignUp, setAgentSignUp] = useState(false);  
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -50,7 +47,6 @@ function App() {
   return (
     <Container className="App">
       <GlobalStyles />
-      <Navbar modal={setShowModal} userDetails={currentUser} />
       <Routes>
         <Route path="/" element={<HomePage userDetails={currentUser} />} />
         <Route
@@ -61,7 +57,7 @@ function App() {
 
         <Route path="*" element={<Error404page />} />
       </Routes>
-      <Footer />
+      {showModal && <SignUP modal={setShowModal} />}
       {showModal && <SignUP modal={setShowModal} />}
     </Container>
   );
