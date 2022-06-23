@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   ${(props) => props.orientation}: 20px;
   padding: 20px;
   left: 20px;
-  border-radius: 10px;
+  border-radius: 100px;
   display: flex;
   flex-direction: column;
   gap: 20px;

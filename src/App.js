@@ -12,6 +12,7 @@ import Error404page from './components/404';
 import AgentSingle from './components/Agent';
 import NewHome from './components/NewHome';
 import Homes from './components/Homes';
+import SaveListing from './components/SaveLising';
 const Container = styledComponents.main`
   & > section,
   & > footer{
@@ -49,6 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element={<NewHome userDetails={currentUser} />} />
         <Route path="/homes" element={<Homes />} />
+        <Route path="/create-new" element={<SaveListing />} />
         <Route path="/agents" element={<AgentsPage />} />
         <Route path="/agents/:agentID" element={<AgentSingle />} />
 

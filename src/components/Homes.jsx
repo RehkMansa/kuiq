@@ -1,14 +1,48 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Home from './Home';
+import FloatingNavigation from './FloatingNavigation';
+import { FiPlus } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const Section = styled.section`
   height: 100vh;
   display: flex;
   padding: 0 !important;
+  button {
+    color: #f2b636;
+    background-color: transparent;
+    border: 3px solid #f2b636;
+    font-weight: 600;
+    transition: 2s all;
+    // text-transform: uppercase;
+    background-color: #f2b636;
+    color: #fff;
+  }
+
+  button:hover {
+    color: #f2b636;
+    background-color: transparent;
+  }
 
   & > div {
     width: 50%;
+  }
+
+  .btn--flex {
+    position: absolute;
+    top: 50px;
+    right: 70px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f2b636;
+    transition: 1s all;
+    background-color: transparent;
+  }
+  .btn--flex:hover {
+    color: #fff;
+    background-color: #f2b636;
   }
 `;
 
@@ -20,6 +54,7 @@ const SectionLeft = styled.div`
 const SectionRight = styled.div`
   background-color: #070c1f;
   color: #878c9b;
+  position: relative;
   padding: 100px 70px;
   overflow: auto;
   display: flex;
@@ -85,25 +120,11 @@ const InnerSection = styled.div`
 
     padding-right: 20px;
 
-    p{
+    p {
       // color: var(--green)
     }
   }
-  button {
-    color: #f2b636;
-    background-color: transparent;
-    border: 3px solid #f2b636;
-    font-weight: 600;
-    transition: 2s all;
-    // text-transform: uppercase;
-    background-color: #f2b636;
-    color: #fff;
-  }
 
-  button:hover {
-    color: #f2b636;
-    background-color: transparent;
-  }
   h5 {
     font-size: 20px;
     line-height: 20px;
@@ -134,10 +155,25 @@ const InnerSection = styled.div`
 
 const Homes = () => {
   const [homeImage, setHomeImage] = useState('port-interior-3');
+
+  const navigation = useNavigate();
+
+  const goTo = (link) => navigation(link);
+
   return (
     <Section>
-      <SectionLeft bgImage={homeImage}></SectionLeft>
+      <SectionLeft bgImage={homeImage}>
+        <FloatingNavigation orientation={'top'} />
+      </SectionLeft>
       <SectionRight>
+        <button
+          onClick={(e) => {
+            goTo('/create-new');
+          }}
+          className="btn--flex"
+        >
+          Add New Listing <FiPlus />
+        </button>
         <h3>All Apartments</h3>
         <InnerSection>
           <div className="header">
