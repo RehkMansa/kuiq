@@ -62,8 +62,10 @@ export const saveUsers = async (url, dbCollection) => {
     });
 
   const mapUsers = Promise.all(
-    users.map(async (user) => {
+    users.map(async (user, num) => {
       await saveToDB(user, dbCollection);
+
+      // return num;
     })
   );
 };
