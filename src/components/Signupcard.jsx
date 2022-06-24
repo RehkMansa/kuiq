@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { saveToDB } from './firebase/utils';
 import Alert from './Alert';
+import { useNavigate } from 'react-router-dom';
 
 const SlideInUpAnimation = keyframes`${slideInUp}`;
 
@@ -91,12 +92,17 @@ const Signupcard = () => {
   const [state, setState] = useState('');
   const [dummyData, setDummyData] = useState([]);
 
+  const [alert, setAlert] = useState({
+    status: false,
+    message: '',
+  });
+
   const showSignupCard = (e) => {
     showCard === 'none' ? setShowCard('block') : setShowCard('none');
     dataAOS === '' ? setDataAOS('fade-up') : setDataAOS('fade-down');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
@@ -123,8 +129,19 @@ const Signupcard = () => {
       login: dummyData[0].login,
     };
 
-    console.log(data);
-    // saveToDB(data, 'agents');
+    const fbRef = await saveToDB(data, 'agents');
+
+    if (fbRef) {
+      setAlert({
+        status: true,
+        message: 'Saved Successfully to Database',
+      });
+    } else {
+      setAlert({
+        status: true,
+        message: 'An error occurred',
+      });
+    }
   };
 
   useEffect(() => {
@@ -133,7 +150,10 @@ const Signupcard = () => {
       .then((res) => res.json())
       .then((data) => {
         setDummyData(data.results);
+        console.log(dummyData);
       });
+
+    console.log('hello');
   }, []);
 
   return (
@@ -143,7 +163,7 @@ const Signupcard = () => {
       </SignUpButton>
       <SignUpCard displayProp={showCard}>
         <FormWrap onSubmit={handleSubmit}>
-          <Alert color={'#3E464F'} message="Hello World" />
+          {alert.status && <Alert color={'#3E464F'} message={alert.message} />}
           <p>Personal</p>
           <div className="row">
             <input

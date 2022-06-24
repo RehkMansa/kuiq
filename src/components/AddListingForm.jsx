@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 const FormWrapper = styled.form`
   font-family: 'Karla', serif;
   font-weight: 400;
@@ -48,6 +49,13 @@ const FormWrapper = styled.form`
 `;
 
 const AddListingForm = () => {
+  const [title, setTitle] = useState('');
+  const [numberOfRooms, setNumberOfRooms] = useState('');
+  const [price, setPrice] = useState('');
+  const [numberOfGuests, setNumberOfGuests] = useState('');
+  const [amenities, setAmenities] = useState('');
+  const [image, setImage] = useState('');
+
   return (
     <FormWrapper>
       <input className="title" type="text" placeholder="Title of Listing" />

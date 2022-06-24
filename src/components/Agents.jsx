@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 import Signupcard from './Signupcard';
+import FloatingNavigation from './FloatingNavigation';
 import MyAgentCard from './MyAgentCard';
 import {
   fadeInRight,
@@ -175,6 +176,7 @@ const AgentsPage = ({ agentsArr }) => {
         </NavDots>
         <div className="agent-image">
           <Signupcard />
+          <FloatingNavigation />
         </div>{' '}
         <Container
           key={divKey}
