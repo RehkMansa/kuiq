@@ -71,7 +71,7 @@ const MyAgentCard = ({
         <div className="smaller-card">
           <h5>Biography</h5>
           <p>Age: {dob.age}</p>
-          <p>Born and raised in the {agent.nat}</p>
+          <p>Born and raised in the {location.country}</p>
           <p>Location: {location.street.name}</p>
         </div>
       </div>
@@ -92,7 +92,7 @@ const MyAgentCard = ({
           <p>Username: {agent.login.username}</p>
           <p>Cell: {agent.cell}</p>
           <p>
-            UID: {agent.id.name} {agent.id.value}
+            UID: {agent.id}
           </p>
         </div>
       </div>

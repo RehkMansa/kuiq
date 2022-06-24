@@ -47,13 +47,15 @@ export const handleUserProfile = async (userAuth, additionalData) => {
   return userRef;
 };
 
-const saveToDB = async (data, dbLocation) => {
+export const saveToDB = async (data, dbLocation) => {
   const colRef = collection(db, dbLocation);
 
-  await addDoc(colRef, data);
+  const docRef = await addDoc(colRef, data);
+
+  return docRef.id;
 };
 
-export const saveUsers = async (url, dbCollection) => {
+/* export const saveUsers = async (url, dbCollection) => {
   let users;
   await fetch(url)
     .then((res) => res.json())
@@ -68,7 +70,7 @@ export const saveUsers = async (url, dbCollection) => {
       // return num;
     })
   );
-};
+}; */
 
 export const fetchAll = async (dbLocation) => {
   const colRef = collection(db, dbLocation);
@@ -81,6 +83,3 @@ export const fetchAll = async (dbLocation) => {
 
   return dataResponse;
 };
-/* await fetchAll('agents').then((res) => {
-        setAgentsArray(res);
-      }); */
