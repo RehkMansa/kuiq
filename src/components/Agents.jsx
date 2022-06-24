@@ -14,6 +14,7 @@ import {
   zoomIn,
   pulse,
 } from 'react-animations';
+import { fetchAll } from './firebase/utils';
 
 const flipAnimation = keyframes`${flipInX}`;
 const fadeAnimation = keyframes`${fadeInRight}`;
@@ -116,7 +117,7 @@ const url = `https://randomuser.me/api/?results=25&nat=gb,us,es`;
 const randomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
-const AgentsPage = (props) => {
+const AgentsPage = ({ agentsArr }) => {
   const [agent, setAgent] = useState([]);
   const [countVar, setCountVar] = useState(0);
   const [agentsArray, setAgentsArray] = useState([]);
@@ -126,17 +127,20 @@ const AgentsPage = (props) => {
   const [divKey, setDivKey] = useState(0);
 
   useEffect(() => {
-    console.log(`The state value of count is ${countVar}`);
-    fetchUser();
+    if (agentsArr) {
+      setAgentsArray(agentsArr);
+      setAgent([agentsArr[countVar]]);
+    } else {
+      fetchUsers();
+    }
   }, []);
 
-  const fetchUser = async () =>
-    await fetch(url)
-      .then((data) => data.json())
-      .then((res) => {
-        setAgentsArray(res.results);
-        setAgent([res.results[countVar]]);
-      });
+  const fetchUsers = async () => {
+    await fetchAll('agents').then((res) => {
+      setAgentsArray(res);
+      setAgent([res[countVar]]);
+    });
+  };
 
   const prevImage = () => {
     setCountVar(countVar - 1);

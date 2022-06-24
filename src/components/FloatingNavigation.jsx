@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import NavigationButton from './NavigationButton';
-import { FiHome, FiUserPlus, FiLogIn, FiUsers } from 'react-icons/fi';
+import {
+  FiHome,
+  FiPlus,
+  FiLogIn,
+  FiUsers,
+  FiMapPin,
+  FiLogOut,
+} from 'react-icons/fi';
+import { auth, signInWithGoogle } from './firebase/utils';
 
 const Wrapper = styled.div`
   background-color: #070c1f;
@@ -23,10 +31,32 @@ const Wrapper = styled.div`
 const FloatingNavigation = ({ orientation }) => {
   return (
     <Wrapper orientation={orientation}>
-      <NavigationButton icon={<FiHome />} title="Home" />
-      <NavigationButton icon={<FiUserPlus />} title="Sign Up" />
-      <NavigationButton icon={<FiLogIn />} title="Login In" />
-      <NavigationButton icon={<FiUsers />} title="View Agents" />
+      <NavigationButton icon={<FiHome />} title="Home" link="/" />
+      <div>
+        <NavigationButton
+          icon={<FiMapPin />}
+          title="View Homes"
+          link="/homes"
+        />
+      </div>
+      <div>
+        <NavigationButton
+          icon={<FiPlus />}
+          title="New Listing"
+          link="/create-new"
+        />
+      </div>
+      <div onClick={signInWithGoogle}>
+        <NavigationButton icon={<FiLogIn />} title="Log In" />
+      </div>
+      <NavigationButton icon={<FiUsers />} link="/agents" title="View Agents" />
+      <div
+        onClick={() => {
+          auth.signOut();
+        }}
+      >
+        <NavigationButton icon={<FiLogOut />} title="Log out" />
+      </div>
     </Wrapper>
   );
 };

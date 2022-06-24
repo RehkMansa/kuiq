@@ -1,8 +1,9 @@
-<AgentCard key={agent.login.uuid}>
-  <h4>
-    {name.first} {name.last}
-  </h4>
-  <p>Age: {dob.age}</p>
-  <p>Location: {location.street.name}</p>
-  <img src={picture.thumbnail} alt="" />
-</AgentCard>;
+//all post activities
+//->user sign up with google
+//->user uploads listing
+//->agent sign up
+
+//get requests
+//=>show users(agents)
+//=>show listings
+//=>show user details

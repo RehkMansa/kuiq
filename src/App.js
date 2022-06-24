@@ -1,4 +1,4 @@
-import { auth, handleUserProfile } from './components/firebase/utils';
+import { auth, fetchAll, handleUserProfile } from './components/firebase/utils';
 import GlobalStyles from './components/styles/Global';
 import styledComponents from 'styled-components';
 import SignUP from './components/SignUp';
@@ -26,22 +26,33 @@ const Container = styledComponents.main`
 function App() {
   const [currentUser, setCurrentUser] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [agentSignUp, setAgentSignUp] = useState(false);
+  const [agentsArray, setAgentsArray] = useState('');
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userData = await handleUserProfile(user);
         onSnapshot(userData, (snapshot) => {
-          console.log('Current data: ', snapshot.data());
           setCurrentUser({ ...snapshot.data() });
-          console.log(currentUser);
+          console.log(snapshot.data);
         });
       } else {
         setCurrentUser('');
         console.log('User Not Logged In');
       }
     });
+  }, []);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      await fetchAll('agents').then((res) => {
+        setAgentsArray(res);
+
+        console.log(res);
+      });
+    };
+
+    fetchUsers();
   }, []);
 
   return (
@@ -51,7 +62,10 @@ function App() {
         <Route path="/" element={<NewHome userDetails={currentUser} />} />
         <Route path="/homes" element={<Homes />} />
         <Route path="/create-new" element={<SaveListing />} />
-        <Route path="/agents" element={<AgentsPage />} />
+        <Route
+          path="/agents"
+          element={<AgentsPage agentsArr={agentsArray} />}
+        />
         <Route path="/agents/:agentID" element={<AgentSingle />} />
 
         <Route path="*" element={<Error404page />} />

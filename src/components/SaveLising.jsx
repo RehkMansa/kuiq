@@ -28,7 +28,7 @@ const SectionRight = styled.div`
   flex-direction: column;
   gap: 20px;
   align-items: start;
-  // justify-content: center;
+  justify-content: center;
   font-family: 'Karla', serif;
   font-weight: 400;
 

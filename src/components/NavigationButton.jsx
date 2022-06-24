@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -36,9 +37,15 @@ const TextWrapper = styled.div`
   background-color: #070c1f;
 `;
 
-const NavigationButton = ({ icon, onClickFunc, title }) => {
+const NavigationButton = ({ icon, link, title }) => {
+  const navigate = useNavigate();
+
   return (
-    <Wrapper onClick={onClickFunc}>
+    <Wrapper
+      onClick={(e) => {
+        navigate(link);
+      }}
+    >
       <IconWrap>{icon}</IconWrap>
       <TextWrapper className="textArea">{title}</TextWrapper>
     </Wrapper>

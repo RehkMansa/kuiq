@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FloatingNavigation from './FloatingNavigation';
 import { FiPlus } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import FloatingUserBall from './FloatingUserBall';
 
 const Section = styled.section`
   height: 100vh;
@@ -164,6 +165,7 @@ const Homes = () => {
     <Section>
       <SectionLeft bgImage={homeImage}>
         <FloatingNavigation orientation={'top'} />
+        <FloatingUserBall />
       </SectionLeft>
       <SectionRight>
         <button

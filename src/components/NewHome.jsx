@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import FloatingNavigation from './FloatingNavigation';
+import FloatingUserBall from './FloatingUserBall';
 
 const Section = styled.section`
   height: 100vh;
@@ -69,11 +70,12 @@ const SectionRight = styled.div`
 
 const imageArray = ['image1', 'image2', 'image3'];
 
-const NewHome = () => {
+const NewHome = ({ userDetails }) => {
   const navigation = useNavigate();
   return (
     <Section>
       <SectionLeft>
+        {userDetails && <FloatingUserBall user={userDetails} />}
         <FloatingNavigation orientation={'top'} />
       </SectionLeft>
       <SectionRight>

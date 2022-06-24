@@ -16,6 +16,9 @@ const GlobalStyles = createGlobalStyle`
     --gray5: #E0E0E0;
     --white: #fff;
     --green: #27AE60;
+    --gold: #f2b636;
+    --blue: #070c1f;
+    --ash: #878c9b;
     overflow-x: hidden;
   }
   body {
