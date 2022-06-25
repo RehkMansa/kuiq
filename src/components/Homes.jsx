@@ -165,7 +165,7 @@ const Homes = () => {
     <Section>
       <SectionLeft bgImage={homeImage}>
         <FloatingNavigation orientation={'top'} />
-        <FloatingUserBall />
+        {/* <FloatingUserBall /> */}
       </SectionLeft>
       <SectionRight>
         <button
